@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishnachandran P – Finance Professional</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #112240;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --cream: #F8F5EF;
+    --slate: #4A5568;
+    --steel: #718096;
+    --white: #FFFFFF;
+    --accent-teal: #1A6B72;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .no-print { display: none !important; }
+    body { background: white; }
+    .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { box-shadow: none; max-width: 100%; }
+  }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 28px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .toolbar-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .toolbar-actions { display: flex; gap: 10px; }
+  .btn {
+    padding: 7px 18px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .btn-outline:hover { background: rgba(201,168,76,0.15); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed; top: 46px; left: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    z-index: 99; transition: width 0.1s;
+    width: 0%;
+  }
+
+  /* ── PAGE ── */
+  .page {
+    max-width: 900px;
+    margin: 70px auto 40px;
+    background: white;
+    box-shadow: 0 8px 60px rgba(10,22,40,0.18);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 48px 52px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 260px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(201,168,76,0.07) 100%);
+  }
+  .hero::after {
+    content: '₹';
+    position: absolute; right: 40px; top: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+    user-select: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    margin-bottom: 4px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+  }
+  .hero-contacts {
+    display: flex; flex-wrap: wrap; gap: 20px;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.78);
+    font-size: 0.82rem;
+  }
+  .contact-item a { color: rgba(255,255,255,0.78); text-decoration: none; }
+  .contact-item a:hover { color: var(--gold); }
+  .contact-icon {
+    width: 28px; height: 28px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* ── STATS BAND ── */
+  .stats-band {
+    background: var(--navy-mid);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item {
+    padding: 18px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(201,168,76,0.15);
+    cursor: default;
+    transition: background 0.25s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(201,168,76,0.08); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: block;
+  }
+  .stat-label {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── BODY LAYOUT ── */
+  .body-wrap {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: #F2EFE9;
+    padding: 36px 28px;
+    border-right: 1px solid rgba(10,22,40,0.08);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    padding: 36px 40px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title.sidebar-title {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+  .section-block { margin-bottom: 32px; }
+
+  /* ── SUMMARY ── */
+  .summary-text {
+    font-size: 0.88rem;
+    color: var(--slate);
+    line-height: 1.75;
+    border-left: 3px solid var(--gold);
+    padding-left: 14px;
+    text-align: justify;
+  }
+
+  /* ── SKILL BARS ── */
+  .skill-bar-wrap { margin-bottom: 12px; }
+  .skill-bar-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .skill-name { font-size: 0.78rem; font-weight: 500; color: var(--navy); }
+  .skill-pct { font-size: 0.7rem; color: var(--steel); font-family: 'JetBrains Mono', monospace; }
+  .skill-track {
+    height: 5px;
+    background: rgba(10,22,40,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 3px;
+    width: 0%;
+    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ── SOFT SKILLS TAGS ── */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 3px;
+    background: var(--navy);
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(201,168,76,0.2);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .tag:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+  /* ── LANGUAGES ── */
+  .lang-item { margin-bottom: 8px; }
+  .lang-name { font-size: 0.8rem; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+  .lang-level { font-size: 0.7rem; color: var(--steel); }
+  .lang-dots { display: flex; gap: 4px; margin-top: 4px; }
+  .lang-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(10,22,40,0.15);
+  }
+  .lang-dot.filled { background: var(--gold); }
+
+  /* ── EDUCATION ── */
+  .edu-item { margin-bottom: 16px; }
+  .edu-degree { font-size: 0.82rem; font-weight: 600; color: var(--navy); line-height: 1.4; }
+  .edu-school { font-size: 0.76rem; color: var(--slate); margin-top: 2px; }
+  .edu-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+
+  /* ── INTERESTS ── */
+  .interest-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; color: var(--slate);
+    margin-bottom: 8px;
+  }
+  .interest-icon { font-size: 1rem; }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .exp-item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 28px;
+    cursor: pointer;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute; left: 0; top: 8px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--gold-light);
+    transition: transform 0.2s;
+  }
+  .exp-item::after {
+    content: '';
+    position: absolute; left: 3px; top: 18px;
+    width: 1px;
+    height: calc(100% + 4px);
+    background: var(--border);
+  }
+  .exp-item:last-child::after { display: none; }
+  .exp-item:hover::before { transform: scale(1.4); }
+  .exp-header { margin-bottom: 4px; }
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .exp-company { font-size: 0.8rem; color: var(--accent-teal); font-weight: 600; margin-top: 1px; }
+  .exp-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-top: 3px;
+  }
+  .exp-bullets {
+    margin-top: 10px;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .exp-bullets.collapsed { max-height: 0; }
+  .exp-bullets.expanded { max-height: 1000px; }
+  .exp-bullet {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 0.8rem; color: var(--slate);
+    margin-bottom: 6px; line-height: 1.55;
+  }
+  .exp-bullet::before {
+    content: '▸';
+    color: var(--gold);
+    font-size: 0.65rem;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .highlight {
+    background: rgba(201,168,76,0.15);
+    color: var(--navy);
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.76rem;
+  }
+  .exp-toggle {
+    margin-top: 6px;
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* ── ACHIEVEMENT BANNER ── */
+  .achievement {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 16px;
+  }
+  .achievement-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .achievement-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; }
+  .achievement-value { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.15rem; font-weight: 700; }
+
+  /* ── TOOLTIP ── */
+  [data-tip] { position: relative; }
+  [data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+    background: var(--navy); color: white;
+    font-size: 0.7rem; padding: 4px 8px; border-radius: 3px;
+    white-space: nowrap; pointer-events: none;
+    border: 1px solid var(--gold);
+    z-index: 10;
+  }
+
+  /* ── FOOTER ── */
+  .resume-footer {
+    background: var(--navy);
+    padding: 16px 52px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-text { font-size: 0.72rem; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; }
+  .footer-date { font-size: 0.72rem; color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .body-wrap { grid-template-columns: 1fr; }
+    .hero { padding: 36px 24px 28px; }
+    .hero-name { font-size: 2rem; }
+    .stats-band { grid-template-columns: repeat(2,1fr); }
+    .main { padding: 24px 20px; }
+    .sidebar { padding: 24px 20px; }
+    .resume-footer { flex-direction: column; gap: 6px; padding: 14px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar no-print">
+  <span class="toolbar-brand">Krishnachandran P · Finance Professional</span>
+  <div class="toolbar-actions">
+    <button class="btn btn-outline" onclick="window.print()">🖨 Print</button>
+    <button class="btn btn-gold" onclick="downloadHTML()">⬇ Download HTML</button>
+  </div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- RESUME PAGE -->
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-name">Krishnachandran P</div>
+    <div class="hero-title">Assistant Finance Manager</div>
+    <div class="hero-contacts">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <a href="mailto:ppkrishnacbe@gmail.com">ppkrishnacbe@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <span>91-9677595986</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <span>Kuniyamuthur, Coimbatore</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">in</div>
+        <a href="https://linkedin.com/in/krishnachandranp" target="_blank">krishnachandranp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BAND -->
+  <div class="stats-band">
+    <div class="stat-item" data-tip="Years of Finance Experience">
+      <span class="stat-num" data-count="15">0</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat-item" data-tip="GST Refund Secured at Rnd Softech">
+      <span class="stat-num">₹1.73Cr</span>
+      <span class="stat-label">GST Refund Secured</span>
+    </div>
+    <div class="stat-item" data-tip="Avg. Monthly SEZ Forms Processed">
+      <span class="stat-num" data-count="70">0</span>
+      <span class="stat-label">Monthly SEZ Forms</span>
+    </div>
+    <div class="stat-item" data-tip="Finance Team Members Managed">
+      <span class="stat-num" data-count="5">0</span>
+      <span class="stat-label">Team Members Led</span>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-wrap">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- SUMMARY -->
+      <div class="section-block">
+        <div class="section-label">Profile</div>
+        <div class="section-title sidebar-title">Summary</div>
+        <p class="summary-text">
+          Results-driven finance professional with 15+ years of experience in corporate accounting, revenue cycle management, statutory compliance (Specializing in GST, TDS and SEZ), auditing, financial planning and reporting. Proven ability to streamline financial operations, ensuring compliance and delivering data-driven insights to support strategic business objectives. Strong analytical and leadership abilities, with a proven track record of driving organizational growth through sound financial management and strategic initiatives.
+        </p>
+      </div>
+
+      <!-- TECHNICAL SKILLS -->
+      <div class="section-block">
+        <div class="section-label">Tools & Systems</div>
+        <div class="section-title sidebar-title">Technical Skills</div>
+        <div class="skill-bar-wrap" data-tip="Advanced">
+          <div class="skill-bar-top"><span class="skill-name">Power BI │ Claude & Chat GPT │ AI Tools</span><span class="skill-pct">90%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-bar-wrap" data-tip="Expert">
+          <div class="skill-bar-top"><span class="skill-name">Tally Prime Edit Log</span><span class="skill-pct">95%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+        </div>
+        <div class="skill-bar-wrap" data-tip="Expert">
+          <div class="skill-bar-top"><span class="skill-name">Compu Tax & RPU (TDS)</span><span class="skill-pct">95%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+        </div>
+        <div class="skill-bar-wrap" data-tip="Advanced">
+          <div class="skill-bar-top"><span class="skill-name">Proficient in Excel</span><span class="skill-pct">88%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-bar-wrap" data-tip="Intermediate">
+          <div class="skill-bar-top"><span class="skill-name">Quick Books</span><span class="skill-pct">75%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-bar-wrap" data-tip="Proficient">
+          <div class="skill-bar-top"><span class="skill-name">MS Office</span><span class="skill-pct">85%</span></div>
+          <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+        </div>
+      </div>
+
+      <!-- SOFT SKILLS -->
+      <div class="section-block">
+        <div class="section-label">Interpersonal</div>
+        <div class="section-title sidebar-title">Soft Skills</div>
+        <div class="tag-cloud">
+          <span class="tag">Results Oriented</span>
+          <span class="tag">Adaptability</span>
+          <span class="tag">Analytical</span>
+          <span class="tag">Team Management</span>
+          <span class="tag">Effective Communication</span>
+          <span class="tag">Solution Oriented</span>
+          <span class="tag">Leadership & Initiative</span>
+          <span class="tag">Conflict Resolution</span>
+          <span class="tag">Continuous Learning</span>
+        </div>
+      </div>
+
+      <!-- EDUCATION & CERTIFICATES -->
+      <div class="section-block">
+        <div class="section-label">Academics & Certificates</div>
+        <div class="section-title sidebar-title">Education & Certificates</div>
+
+        <!-- Certification — standalone highlighted row -->
+        <div style="background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.35);border-radius:5px;padding:10px 12px;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+            <span style="font-size:1rem;">🏅</span>
+            <span style="font-family:'Playfair Display',serif;font-size:0.82rem;font-weight:700;color:var(--navy);">AI Career Accelerator Program</span>
+          </div>
+          <div style="font-size:0.74rem;color:var(--accent-teal);font-weight:600;padding-left:24px;">Skill Nation</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--gold);margin-top:4px;padding-left:24px;">11 / 2026 &nbsp;·&nbsp; Certified</div>
+        </div>
+
+        <!-- Divider -->
+        <div style="border-top:1px solid var(--border);margin:0 0 14px;"></div>
+
+        <!-- MBA -->
+        <div class="edu-item">
+          <div class="edu-degree">Master of Business Administration – Finance</div>
+          <div class="edu-school">Bharathiyar University, Coimbatore</div>
+          <div class="edu-year">11 / 2026</div>
+        </div>
+
+        <!-- BCom -->
+        <div class="edu-item">
+          <div class="edu-degree">Bachelor of Commerce</div>
+          <div class="edu-school">Government Arts College, Coimbatore</div>
+          <div class="edu-year">05 / 2007</div>
+        </div>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="section-block">
+        <div class="section-label">Communication</div>
+        <div class="section-title sidebar-title">Languages</div>
+        <div class="lang-item">
+          <div class="lang-name">Tamil & English</div>
+          <div class="lang-level">Read · Write · Speak</div>
+          <div class="lang-dots">
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+          </div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Malayalam</div>
+          <div class="lang-level">Speak</div>
+          <div class="lang-dots">
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div>
+            <div class="lang-dot"></div>
+            <div class="lang-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERESTS -->
+      <div class="section-block">
+        <div class="section-label">Beyond Work</div>
+        <div class="section-title sidebar-title">Interests & Hobbies</div>
+        <div class="interest-item"><span class="interest-icon">🌱</span> Volunteering for Environmental Causes</div>
+        <div class="interest-item"><span class="interest-icon">🎵</span> Singing</div>
+      </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+      <!-- KEY ACHIEVEMENTS -->
+      <div class="section-block">
+        <div class="section-label">Highlights</div>
+        <div class="section-title">Key Achievements</div>
+        <div class="achievement">
+          <div class="achievement-icon">🏆</div>
+          <div>
+            <div class="achievement-label">GST Refund Secured</div>
+            <div class="achievement-value">₹ 1.73 Crores · Rnd Softech</div>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-icon">📋</div>
+          <div>
+            <div class="achievement-label">MEPZ SEZ Compliance</div>
+            <div class="achievement-value">70 Monthly Forms · Approvals Obtained</div>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-icon">👥</div>
+          <div>
+            <div class="achievement-label">Team Leadership</div>
+            <div class="achievement-value">Led Finance Teams of 4–5 Members</div>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-icon">🤖</div>
+          <div>
+            <div class="achievement-label">AI Certification · Skill Nation · 11/2026</div>
+            <div class="achievement-value">AI Career Accelerator Program</div>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-icon">🌍</div>
+          <div>
+            <div class="achievement-label">Global Exposure</div>
+            <div class="achievement-value">Foreign Subsidiary Finalization · UAE, UK & US</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="section-block">
+        <div class="section-label">Career History</div>
+        <div class="section-title">Experience <span style="font-size:0.7rem;color:var(--steel);font-family:'Inter',sans-serif;font-weight:400"> — click any role to expand / collapse</span></div>
+
+        <!-- Job 1 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-header">
+            <div class="exp-role">Assistant Finance Manager</div>
+            <div class="exp-company">Point Perfect Technology Solutions India Private Limited, Coimbatore</div>
+            <div class="exp-period">01 / 2025 — 06 / 2026</div>
+          </div>
+          <div class="exp-bullets expanded">
+            <div class="exp-bullet">Managed Revenue Cycle Management (RCM), including client contract reviews, invoice validation, GST-compliant billing, accounts receivable reconciliation, and month-end revenue reporting.</div>
+            <div class="exp-bullet">Oversaw general ledger reviews, accounts finalization for domestic operations and a <span class="highlight">UAE subsidiary</span>, and preparation of MIS reports.</div>
+            <div class="exp-bullet">Strengthened internal controls, supported financial planning, and supervised and reviewed the work of a <span class="highlight">five-member team</span>.</div>
+            <div class="exp-bullet">Ensured <span class="highlight">timely filing</span> of periodic statutory returns and compliance with regulatory requirements.</div>
+            <div class="exp-bullet">Filed SOFTEX forms with MEPZ SEZ and coordinated closure of Foreign Inward Remittance Certificates (FIRCs).</div>
+            <div class="exp-bullet">Coordinated submission of purchase and service procurement details to MEPZ SEZ and obtained approvals for <span class="highlight">70 average monthly forms</span>.</div>
+            <div class="exp-bullet">Managed periodic renewals of business-related insurance policies.</div>
+          </div>
+          <span class="exp-toggle">▲ Collapse</span>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-header">
+            <div class="exp-role">Senior Finance Executive</div>
+            <div class="exp-company">Rnd Softech Private Limited, Coimbatore</div>
+            <div class="exp-period">11 / 2019 — 12 / 2024</div>
+          </div>
+          <div class="exp-bullets expanded">
+            <div class="exp-bullet">GST Compliance &amp; Refunds: Managed GST registration, tax computation and payments, Reverse Charge Mechanism (RCM) workings, periodic return filing and reconciliations, securing <span class="highlight">₹1.73 crores</span> in GST refunds.</div>
+            <div class="exp-bullet">Ensured timely and accurate Direct and Indirect Tax compliance, including GST and TDS filings.</div>
+            <div class="exp-bullet">Prepared monthly financial and MIS reports for senior management to support decision-making.</div>
+            <div class="exp-bullet">Led ledger scrutiny and account finalization, including <span class="highlight">foreign subsidiaries in the UK and US</span>.</div>
+            <div class="exp-bullet">Prepared and analyzed financial statements to identify cost-saving opportunities and improve financial performance.</div>
+            <div class="exp-bullet">Coordinated with internal and external auditors to strengthen financial accuracy and compliance.</div>
+            <div class="exp-bullet">Established financial policies, procedures and controls to standardize departmental processes.</div>
+            <div class="exp-bullet">Introduced process improvements and controls to enhance invoicing efficiency and accuracy.</div>
+            <div class="exp-bullet">Supervised and mentored a <span class="highlight">four-member finance team</span>, promoting productivity and continuous improvement.</div>
+            <div class="exp-bullet">Evaluated existing finance software systems and identified opportunities to improve efficiency and reporting capabilities.</div>
+            <div class="exp-bullet">Reviewed payroll and salary processing, including accuracy and statutory deductions.</div>
+          </div>
+          <span class="exp-toggle">▲ Collapse</span>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-header">
+            <div class="exp-role">Process Associate</div>
+            <div class="exp-company">Vitae International Accounting Services (P) Ltd., Coimbatore</div>
+            <div class="exp-period">12 / 2018 — 06 / 2019</div>
+          </div>
+          <div class="exp-bullets collapsed">
+            <div class="exp-bullet">Preparation of Tax Returns – Gained exposure in US Federal and State tax regulations for Individual filers.</div>
+            <div class="exp-bullet">Preparation of Financial Statements.</div>
+            <div class="exp-bullet">Organized Client meetings to provide project updates.</div>
+          </div>
+          <span class="exp-toggle">▼ Expand</span>
+        </div>
+
+        <!-- Job 4 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-header">
+            <div class="exp-role">Audit Assistant (incl. Articleship)</div>
+            <div class="exp-company">M.S. Jagannathan & Visvanathan (Chartered Accountants), Coimbatore</div>
+            <div class="exp-period">06 / 2013 — 11 / 2018</div>
+          </div>
+          <div class="exp-bullets collapsed">
+            <div class="exp-bullet">Preparation of financial statements, supervision and review of team members work as well as establishing and strengthening of cordial relationship through liaison at various levels of top management.</div>
+            <div class="exp-bullet">Assuring compliance with financial reporting and statutory framework.</div>
+            <div class="exp-bullet">Audit point of view experience in SAP and ERP.</div>
+            <div class="exp-bullet">Handling of taxation matters viz., computation of tax and its payment confirmation, audit and return filing for GST, Central Excise, VAT, Service Tax, TDS and Income Tax.</div>
+            <div class="exp-bullet">Responses to material misstatement, review of accounting estimates for bias and analyze significant unusual transactions.</div>
+            <div class="exp-bullet">Accounts receivables and Accounts Payable – ageing, control and follow up.</div>
+            <div class="exp-bullet">Carried statutory audit, internal audit, process or operational audit, supply chain management audit, VAT audit, inventory audit and its valuation for various manufacturing and service industries.</div>
+            <div class="exp-bullet">Preparation of audit report and file audit papers accordingly. Recommended internal control improvements to enhance organizational efficiency, support client service and growth targets.</div>
+            <div class="exp-bullet">Held audit closure meeting and follow up recommendation with management for corrective action.</div>
+          </div>
+          <span class="exp-toggle">▼ Expand</span>
+        </div>
+
+        <!-- Job 5 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-header">
+            <div class="exp-role">Audit Associate</div>
+            <div class="exp-company">Astral Consulting Ltd., Coimbatore</div>
+            <div class="exp-period">11 / 2011 — 09 / 2012</div>
+          </div>
+          <div class="exp-bullets collapsed">
+            <div class="exp-bullet">Carried internal audit, process or operational audit, supply chain management audit, inventory audit and its valuation for various manufacturing and service industries.</div>
+            <div class="exp-bullet">Preparation of audit report and file audit papers accordingly. Recommended internal control improvements to enhance organizational efficiency, support client service and growth targets.</div>
+            <div class="exp-bullet">Held audit closure meeting and follow up recommendation with management for corrective action.</div>
+          </div>
+          <span class="exp-toggle">▼ Expand</span>
+        </div>
+
+        <!-- Job 6 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-header">
+            <div class="exp-role">Accounts Executive</div>
+            <div class="exp-company">Sree Sakthi Ganapathy Textiles, Coimbatore</div>
+            <div class="exp-period">11 / 2008 — 10 / 2011</div>
+          </div>
+          <div class="exp-bullets collapsed">
+            <div class="exp-bullet">Book keeping, accounting, ledger scrutinisation, preparation of BRS, intercompany reconciliation, accounts finalization and understanding of accounting procedures.</div>
+            <div class="exp-bullet">Reconciliation of payroll, all the customers and vendors account at regular intervals.</div>
+            <div class="exp-bullet">Maintenance of all the cheque/draft receipts and account them appropriately.</div>
+            <div class="exp-bullet">Coordinating with statutory auditors.</div>
+            <div class="exp-bullet">Preparation of MIS reports to management.</div>
+          </div>
+          <span class="exp-toggle">▼ Expand</span>
+        </div>
+
+      </div><!-- /section-block -->
+    </div><!-- /main -->
+  </div><!-- /body-wrap -->
+
+  <!-- FOOTER -->
+  <div class="resume-footer">
+    <span class="footer-text">Place: Coimbatore · Date: 04/11/2026</span>
+    <span class="footer-date">Signature: Krishnachandran P</span>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+  // ── SCROLL PROGRESS ──
+  window.addEventListener('scroll', () => {
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  // ── COUNT-UP ANIMATION ──
+  function countUp(el, target, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = Math.floor(start) + (el.dataset.suffix || '');
+    }, 16);
+  }
+
+  // ── SKILL BARS ANIMATION ──
+  function animateSkills() {
+    document.querySelectorAll('.skill-fill').forEach(bar => {
+      bar.style.width = bar.dataset.width + '%';
+    });
+  }
+
+  // ── INTERSECTION OBSERVER ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        // count-up numbers
+        document.querySelectorAll('[data-count]').forEach(el => {
+          countUp(el, parseInt(el.dataset.count), 1200);
+        });
+        // skill bars
+        animateSkills();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.1 });
+  observer.observe(document.querySelector('.stats-band'));
+
+  // ── EXPAND / COLLAPSE ──
+  function toggleExp(item) {
+    const bullets = item.querySelector('.exp-bullets');
+    const toggle = item.querySelector('.exp-toggle');
+    if (bullets.classList.contains('expanded')) {
+      bullets.classList.replace('expanded', 'collapsed');
+      toggle.textContent = '▼ Expand';
+    } else {
+      bullets.classList.replace('collapsed', 'expanded');
+      toggle.textContent = '▲ Collapse';
+    }
+  }
+
+  // ── DOWNLOAD ──
+  function downloadHTML() {
+    const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'Krishnachandran_P_Resume.html';
+    a.click();
+  }
+</script>
+
+</body>
+</html>
